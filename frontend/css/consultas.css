@@ -1,0 +1,321 @@
+.page-header {
+    margin-bottom: 16px;
+}
+
+.page-header-title h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #173b12;
+    margin-bottom: 4px;
+}
+
+.page-header-title p {
+    color: #6b7d67;
+    font-size: 13px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+}
+
+.consulta-card {
+    padding: 18px;
+    margin-bottom: 18px;
+}
+
+.card-header-custom {
+    margin-bottom: 16px;
+}
+
+.card-header-custom h3 {
+    font-size: 16px;
+    color: #183d14;
+    margin-bottom: 4px;
+}
+
+.card-header-custom span {
+    color: #7b8877;
+    font-size: 12px;
+}
+
+.consulta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group.span-2,
+.form-group.span-3 {
+    grid-column: span 3;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2b4d22;
+}
+
+.consulta-form .form-group select,
+.consulta-form .form-group input[type="text"] {
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.10);
+    padding: 0 12px;
+    background: #fdfdfd;
+    font-size: 13px;
+    color: #1e2c1e;
+    transition: 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.consulta-form .form-group select:focus,
+.consulta-form .form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #4a9a2a;
+    box-shadow: 0 0 0 3px rgba(74,154,42,0.10);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-search,
+.btn-clear,
+.btn-detail {
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-search {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4a9a2a, #2f6d12);
+    color: white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.btn-search:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74,154,42,0.30);
+}
+
+.btn-clear {
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 10px;
+    background: #eef3eb;
+    color: #37552f;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.btn-clear:hover {
+    background: #dfe9d8;
+}
+
+.btn-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: rgba(74,154,42,0.12);
+    color: #2f6d12;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.btn-detail:hover {
+    background: #4a9a2a;
+    color: white;
+}
+
+.table-card {
+    overflow: hidden;
+}
+
+.table-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.table-header h3 {
+    font-size: 17px;
+    color: #173b12;
+    margin-bottom: 4px;
+}
+
+.table-header span {
+    font-size: 12px;
+    color: #7a8876;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 420px;
+}
+
+.consulta-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.consulta-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 12px 14px;
+    color: white;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    text-align: left;
+    background: linear-gradient(135deg, #173b12, #244f1d);
+}
+
+.consulta-table tbody tr {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.consulta-table tbody tr:hover {
+    background: rgba(74,154,42,0.04);
+}
+
+.consulta-table td {
+    padding: 12px 14px;
+    color: #465342;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.td-id {
+    font-weight: 700;
+    color: #2f6d12;
+}
+
+.td-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.td-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #b9f77c;
+    color: #173b12;
+    font-weight: 700;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge-grade {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(74,154,42,0.10);
+    color: #2f6d12;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.tipo-tag {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(23,59,18,0.08);
+    color: #173b12;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(74,154,42,0.10);
+    color: #2f6d12;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.td-cip code {
+    background: #eef5e9;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: #173b12;
+    font-size: 11px;
+}
+
+.empty-state {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 52px;
+    color: #b7c3b2;
+    margin-bottom: 16px;
+}
+
+.empty-state h3 {
+    color: #27441f;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: #7b8877;
+}
+
+@media (max-width: 900px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.span-2,
+    .form-group.span-3 {
+        grid-column: span 1;
+    }
+
+    .form-actions {
+        justify-content: stretch;
+        flex-direction: column;
+    }
+
+    .btn-search,
+    .btn-clear {
+        width: 100%;
+        justify-content: center;
+    }
+}

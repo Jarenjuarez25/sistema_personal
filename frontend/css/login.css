@@ -1,0 +1,427 @@
+        :root {
+            --green-bright: #5db85d;
+            --green-mid: #3a7a3a;
+            --green-dark: #1a4a1a;
+            --green-deep: #0a2010;
+            --green-neon: #6fda6f;
+            --bg-right: #080f0a;
+            --bg-panel: rgba(5, 20, 10, 0.85);
+            --border-subtle: rgba(93, 184, 93, 0.25);
+            --text-muted: #7a9a7a;
+            --text-dim: #4a6a4a;
+        }
+ 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Barlow', sans-serif;
+            background: #050d07;
+        }
+ 
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+ 
+        /* ─── LEFT PANEL ─────────────────────────── */
+        .left {
+            width: 55%;
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        .left-bg {
+            position: absolute;
+            inset: 0;
+            background: url("../../assets/fondo.jpg") no-repeat center / cover;
+        }
+ 
+        .left-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to right, rgba(4,14,6,0.1) 0%, rgba(4,14,6,0.6) 100%),
+                linear-gradient(to bottom, rgba(0,20,5,0.4) 0%, rgba(0,0,0,0.3) 50%, rgba(0,15,5,0.5) 100%);
+        }
+ 
+        /* Diagonal separator */
+        .left-diagonal {
+            position: absolute;
+            right: -2px;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            background: linear-gradient(to bottom right,
+                transparent 0%, transparent 48%,
+                var(--green-bright) 49%, var(--green-bright) 51%,
+                transparent 52%, transparent 100%);
+            z-index: 10;
+        }
+ 
+        .left-diagonal::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, transparent, var(--green-bright) 30%, var(--green-neon) 50%, var(--green-bright) 70%, transparent);
+            box-shadow: 0 0 12px var(--green-bright), 0 0 25px rgba(93,184,93,0.4);
+        }
+ 
+        .left-content {
+            position: relative;
+            z-index: 5;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+ 
+        .logo-wrap {
+            position: relative;
+            margin-bottom: 28px;
+            animation: floatLogo 4s ease-in-out infinite;
+        }
+ 
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+ 
+        .logo-ring {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 2px solid rgba(93,184,93,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 30px rgba(93,184,93,0.15), inset 0 0 30px rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+        }
+ 
+        .logo-ring::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 1px solid rgba(93,184,93,0.15);
+        }
+ 
+        /* Emblem placeholder — replace with actual logo image */
+        .logo-emblem {
+            font-size: 52px;
+            color: var(--green-bright);
+            text-shadow: 0 0 20px rgba(93,184,93,0.6);
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+        }
+ 
+        .brigade-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.8);
+            margin-bottom: 6px;
+        }
+ 
+        .brigade-sub {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--green-bright);
+            letter-spacing: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(93,184,93,0.5);
+            margin-bottom: 18px;
+        }
+ 
+        .brigade-motto {
+            font-style: italic;
+            color: rgba(255,255,255,0.65);
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+ 
+        .sistema-badge {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            white-space: nowrap;
+        }
+ 
+        .sistema-badge i {
+            color: var(--green-bright);
+            font-size: 13px;
+        }
+ 
+        /* ─── RIGHT PANEL ────────────────────────── */
+        .right {
+            width: 45%;
+            background: var(--bg-right);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        /* Subtle background texture */
+        .right::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgb(41, 43, 39) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgb(43, 51, 33) 0%, transparent 50%);
+        }
+ 
+        .login-box {
+            position: relative;
+            z-index: 2;
+            width: 340px;
+            padding: 40px 36px 36px;
+            background: rgb(43, 51, 33);
+            border: 1px solid rgba(93,184,93,0.12);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            box-shadow:
+                0 0 0 1px rgba(93,184,93,0.05),
+                0 20px 60px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(93,184,93,0.1);
+            text-align: center;
+            animation: slideIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+        }
+ 
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+ 
+        /* Avatar icon */
+        .avatar-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: rgba(20,60,20,0.8);
+            border: 1.5px solid rgba(93,184,93,0.3);
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(93,184,93,0.15);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+ 
+        .avatar-wrap i {
+            font-size: 26px;
+            color: var(--green-bright);
+        }
+ 
+        .welcome-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--green-bright);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(93,184,93,0.6);
+            margin-bottom: 6px;
+        }
+ 
+        .login-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+ 
+        .login-desc {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            font-weight: 300;
+        }
+ 
+        /* ─── INPUTS ─────────────────────────────── */
+        .field {
+            position: relative;
+            margin-bottom: 16px;
+        }
+ 
+        .field-inner {
+            display: flex;
+            align-items: center;
+            background: rgba(15, 35, 18, 0.7);
+            border: 1px solid rgba(93,184,93,0.2);
+            border-radius: 10px;
+            padding: 0 14px;
+            gap: 10px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+ 
+        .field-inner:focus-within {
+            border-color: rgba(93,184,93,0.6);
+            box-shadow: 0 0 0 3px rgba(93,184,93,0.08), 0 0 15px rgba(93,184,93,0.1);
+        }
+ 
+        .field-inner i.icon {
+            color: var(--text-dim);
+            font-size: 14px;
+            transition: color 0.3s;
+            flex-shrink: 0;
+        }
+ 
+        .field-inner:focus-within i.icon {
+            color: var(--green-bright);
+        }
+ 
+        .field-inner input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 14px 0;
+            color: white;
+            font-size: 14px;
+            font-family: 'Barlow', sans-serif;
+        }
+ 
+        .field-inner input::placeholder {
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+ 
+        .toggle-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: var(--text-dim);
+            font-size: 14px;
+            transition: color 0.3s;
+            width: auto;
+            box-shadow: none;
+        }
+ 
+        .toggle-btn:hover {
+            color: var(--green-bright);
+            transform: none;
+            box-shadow: none;
+            background: none;
+        }
+ 
+        /* ─── SUBMIT BUTTON ──────────────────────── */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4db04d 0%, #2d7a2d 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(60,150,60,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+ 
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+ 
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #5dc85d 0%, #3a8a3a 100%);
+            box-shadow: 0 6px 25px rgba(60,180,60,0.4), 0 0 30px rgba(60,180,60,0.2);
+            transform: translateY(-1px);
+        }
+ 
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+ 
+        .btn-submit i {
+            font-size: 16px;
+        }
+ 
+        /* ─── DIVIDER + FOOTER ───────────────────── */
+        .footer-note {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(93,184,93,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+ 
+        .footer-note i {
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+ 
+        .footer-note span {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+ 
+        /* ─── CORNER DECORATIONS ─────────────────── */
+        .corner {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+        }
+ 
+        .corner-tl { top: 14px; left: 14px; border-top: 1.5px solid rgba(93,184,93,0.4); border-left: 1.5px solid rgba(93,184,93,0.4); border-radius: 3px 0 0 0; }
+        .corner-tr { top: 14px; right: 14px; border-top: 1.5px solid rgba(93,184,93,0.4); border-right: 1.5px solid rgba(93,184,93,0.4); border-radius: 0 3px 0 0; }
+        .corner-bl { bottom: 14px; left: 14px; border-bottom: 1.5px solid rgba(93,184,93,0.4); border-left: 1.5px solid rgba(93,184,93,0.4); border-radius: 0 0 0 3px; }
+        .corner-br { bottom: 14px; right: 14px; border-bottom: 1.5px solid rgba(93,184,93,0.4); border-right: 1.5px solid rgba(93,184,93,0.4); border-radius: 0 0 3px 0; }
+ 
+        /* ─── RESPONSIVE ─────────────────────────── */
+        @media (max-width: 768px) {
+            .left { display: none; }
+            .right { width: 100%; }
+            .login-box { width: 90%; max-width: 360px; }
+        }

@@ -1,0 +1,253 @@
+.page-header {
+    margin-bottom: 16px;
+}
+
+.page-header-title h1 {
+    font-size: 23px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    color: #173b0f;
+    margin-bottom: 4px;
+}
+
+.page-header-title p {
+    color: #6d7b67;
+    font-size: 14px;
+}
+
+.detalle-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.detalle-header {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #173b0f 0%, #234f18 100%);
+}
+
+.detalle-header h3 {
+    color: white;
+    font-size: 17px;
+    font-family: 'Rajdhani', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.detalle-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 6px 12px;
+    border-radius: 30px;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 550px;
+}
+
+.detalle-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1300px;
+}
+
+.detalle-table th:nth-child(1) {
+    width: 50px;
+}
+
+.detalle-table th:nth-child(2) {
+    width: 280px;
+}
+
+.detalle-table th:nth-child(3) {
+    width: 110px;
+}
+
+.detalle-table th:nth-child(4) {
+    width: 120px;
+}
+
+.detalle-table th:nth-child(5) {
+    width: 90px;
+}
+
+.detalle-table th:nth-child(6) {
+    width: 220px;
+}
+
+.detalle-table th:nth-child(7) {
+    width: 110px;
+}
+
+.detalle-table th:nth-child(8) {
+    width: 90px;
+}
+
+.detalle-table th:nth-child(9) {
+    width: 120px;
+}
+
+.detalle-table th:nth-child(10) {
+    width: 120px;
+}
+
+.detalle-table th:nth-child(11) {
+    width: 120px;
+}
+
+.detalle-table th:nth-child(12) {
+    width: 280px;
+}
+
+.detalle-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 11px 12px;
+    color: white;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    text-align: left;
+    background: #204615;
+}
+
+.detalle-table tbody tr {
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: .2s;
+}
+
+.detalle-table tbody tr:hover {
+    background: rgba(80,140,20,0.05);
+}
+
+.detalle-table td {
+    padding: 10px 12px;
+    color: #31422d;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.td-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.td-av {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #b9f77c, #8dd84d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    color: #173b0f;
+    flex-shrink: 0;
+}
+
+.td-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.td-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #173b0f;
+    line-height: 1.3;
+    max-width: 240px;
+}
+
+.td-sub {
+    font-size: 11px;
+    color: #7b8876;
+}
+
+.tipo-tag {
+    font-size: 12px;
+}
+
+.grado-tag {
+    background: rgba(33,91,15,0.08);
+    color: #215b0f;
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.badge.active {
+    background: rgba(58,138,26,0.12);
+    color: #3a8a1a;
+    border: 1px solid rgba(58,138,26,0.3);
+}
+
+.badge.permit {
+    background: rgba(154,112,16,0.12);
+    color: #9a7010;
+    border: 1px solid rgba(154,112,16,0.3);
+}
+
+.badge.vacations {
+    background: rgba(85,85,112,0.12);
+    color: #555570;
+    border: 1px solid rgba(85,85,112,0.3);
+}
+
+.badge.license {
+    background: rgba(80,150,164,0.12);
+    color: #5096a4;
+    border: 1px solid rgba(80,150,164,0.3);
+}
+
+.badge.retired {
+    background: rgba(192,57,43,0.12);
+    color: #c0392b;
+    border: 1px solid rgba(192,57,43,0.3);
+}
+
+.td-cip code {
+    background: #eef5e9;
+    padding: 4px 8px;
+    border-radius: 8px;
+    color: #173b0f;
+    font-size: 11px;
+}
+
+@media (max-width: 900px) {
+
+    .page-header-title h1 {
+        font-size: 26px;
+    }
+
+    .detalle-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .detalle-table {
+        min-width: 1300px;
+    }
+}
