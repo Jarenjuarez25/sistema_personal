@@ -54,6 +54,23 @@
 
     ";
 
+    $queryCivil = "
+    SELECT
+        c.id_civil,
+        c.nombres,
+        c.dni,
+        c.na,
+        c.fecha_ingreso,
+        c.condicion,
+        u.nombre AS unidad
+    FROM personal_civil c
+    LEFT JOIN unidad u
+    ON c.id_unidad = u.id_unidad
+    ORDER BY c.id_civil DESC
+    ";
+
+    $resultCivil = pg_query($conn, $queryCivil);
+
     $result = pg_query($conn, $query);
 
     include 'includes/layout.php';
@@ -82,7 +99,7 @@
 
                 <i class="fa fa-id-card"></i>
 
-                Lista Detallada
+                Personal Militar
 
             </h3>
 
@@ -111,8 +128,6 @@
                         <th>Unidad</th>
 
                         <th>DNI</th>
-
-                        <th>CIP</th>
 
                         <th>Ingreso</th>
 
@@ -205,17 +220,6 @@
 
                             </td>
 
-
-                            <td class="td-cip">
-
-                                <code>
-
-                                    <?= htmlspecialchars($row['cip'] ?? '-') ?>
-
-                                </code>
-
-                            </td>
-
                             <td>
 
                                 <?= htmlspecialchars($row['fecha_ingreso'] ?? '-') ?>
@@ -232,6 +236,112 @@
 
                             </td>
 
+
+                        </tr>
+
+                    <?php endwhile; ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="card detalle-card" style="margin-top:20px;">
+
+        <div class="detalle-header">
+
+            <h3>
+                <i class="fa fa-user-tie"></i>
+                Personal Civil
+            </h3>
+
+            <span class="detalle-badge">
+                <?= pg_num_rows($resultCivil) ?> registros
+            </span>
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table class="detalle-table">
+
+                <thead>
+
+                    <tr>
+                        <th>#</th>
+                        <th>Personal</th>
+                        <th>DNI</th>
+                        <th>N/A</th>
+                        <th>Unidad</th>
+                        <th>Fecha Ingreso</th>
+                        <th>Condición</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <?php $j = 1; ?>
+
+                    <?php while ($row = pg_fetch_assoc($resultCivil)): ?>
+
+                        <?php
+                        $palabras = explode(' ', trim($row['nombres'] ?? ''));
+
+                        $iniciales = strtoupper(
+                            substr($palabras[0] ?? '', 0, 1) .
+                                substr($palabras[1] ?? '', 0, 1)
+                        );
+                        ?>
+
+                        <tr>
+
+                            <td class="td-id"><?= $j++ ?></td>
+
+                            <td>
+
+                                <div class="td-user">
+
+                                    <div class="td-av">
+                                        <?= $iniciales ?>
+                                    </div>
+
+                                    <div class="td-user-info">
+                                        <span class="td-name">
+                                            <?= htmlspecialchars($row['nombres']) ?>
+                                        </span>
+
+                                        <span class="td-sub">
+                                            ID: <?= $row['id_civil'] ?>
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td><?= htmlspecialchars($row['dni']) ?></td>
+
+                            <td>
+                                <code><?= htmlspecialchars($row['na']) ?></code>
+                            </td>
+
+                            <td>
+                                <?= htmlspecialchars($row['unidad']) ?>
+                            </td>
+
+                            <td>
+                                <?= !empty($row['fecha_ingreso']) ? date('d/m/Y', strtotime($row['fecha_ingreso'])) : '-' ?>
+                            </td>
+
+                            <td>
+                                <span class="badge">
+                                    <?= htmlspecialchars($row['condicion']) ?>
+                                </span>
+                            </td>
 
                         </tr>
 

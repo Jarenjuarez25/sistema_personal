@@ -14,11 +14,9 @@
 
 <body>
 
-    <!-- Fondo -->
     <div class="bg"></div>
     <div class="bg-overlay"></div>
 
-    <!-- Card -->
     <div class="card">
         <div class="icon-badge">
             <i class="fa fa-envelope-open-text"></i>
@@ -33,7 +31,6 @@
 
         <form action="../backend/auth/verificar.php" method="POST" id="form-verify">
 
-            <!-- Inputs OTP visuales -->
             <div class="otp-wrap" id="otp-wrap">
                 <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]">
                 <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]">
@@ -43,7 +40,6 @@
                 <input type="text" maxlength="1" class="otp-digit" inputmode="numeric" pattern="[0-9]">
             </div>
 
-            <!-- Campo real que se envía al backend -->
             <input type="hidden" name="codigo" id="codigo-real">
 
             <p class="error-msg" id="error-msg">
@@ -103,7 +99,6 @@
             hidden.value = [...digits].map(d => d.value).join('');
         }
 
-        /* ── Validation before submit ── */
         form.addEventListener('submit', e => {
             syncHidden();
             if (hidden.value.length < 6) {

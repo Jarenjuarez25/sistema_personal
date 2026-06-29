@@ -39,7 +39,7 @@
         .left-bg {
             position: absolute;
             inset: 0;
-            background: url("../../assets/fondo.jpg") no-repeat center / cover;
+            background: url("../../assets/fondo2.jpeg") no-repeat center / cover;
         }
  
         .left-overlay {

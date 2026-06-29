@@ -1,16 +1,10 @@
-/* ================================================================
-   reportes.css — Página de Reportes
-   Responsive: móvil · tablet · laptop · PC
-================================================================ */
 
-/* ── PAGE WRAPPER ────────────────────────────────────────── */
 .reports-page {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-/* ── HEADER ──────────────────────────────────────────────── */
 .reports-header {
     display: flex;
     align-items: center;
@@ -49,7 +43,6 @@
     border: 1px solid rgba(111,218,47,0.25);
 }
 
-/* ── FILTER CARD ─────────────────────────────────────────── */
 .report-filter-card {
     background: #fff;
     border: 1px solid rgba(0,0,0,0.07);
@@ -149,7 +142,6 @@
     transform: translateY(-1px);
 }
 
-/* ── STATS ───────────────────────────────────────────────── */
 .reports-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -219,7 +211,6 @@
     font-weight: 600;
 }
 
-/* ── HISTORY CARD ────────────────────────────────────────── */
 .report-history-card {
     background: #fff;
     border: 1px solid rgba(0,0,0,0.07);
@@ -289,7 +280,6 @@
     vertical-align: middle;
 }
 
-/* BADGES formato */
 .badge {
     display: inline-block;
     padding: 3px 10px;
@@ -301,7 +291,6 @@
 .badge.excel { background: rgba(74,154,42,0.1);  color: #3a8a1a; border: 1px solid rgba(74,154,42,0.25); }
 .badge.pdf   { background: rgba(192,57,43,0.1);  color: #c0392b; border: 1px solid rgba(192,57,43,0.25); }
 
-/* BOTÓN DESCARGA */
 .btn-download {
     display: inline-flex;
     align-items: center;
@@ -323,34 +312,71 @@
     transform: translateY(-1px);
 }
 
-/* ════════════════════════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════════════════════════ */
 
-/* Laptop 1024px – 1279px */
+.report-actions{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:20px;
+}
+
+.report-actions .btn-primary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:12px 22px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#4a9a2a,#2f6d12);
+    color:#fff;
+    font-family:'Barlow',sans-serif;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s ease;
+    box-shadow:0 4px 14px rgba(74,154,42,.28);
+}
+
+.report-actions .btn-primary i{
+    font-size:15px;
+}
+
+.report-actions .btn-primary:hover{
+    transform:translateY(-2px);
+    background:linear-gradient(135deg,#5caf34,#357c18);
+    box-shadow:0 8px 20px rgba(74,154,42,.35);
+}
+
+.report-actions .btn-primary:active{
+    transform:scale(.98);
+}
+
+.report-actions .btn-primary:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+}
+
 @media (max-width: 1279px) and (min-width: 1024px) {
     .filter-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Tablet landscape 768px – 1023px */
 @media (max-width: 1023px) and (min-width: 768px) {
     .filter-grid { grid-template-columns: repeat(2, 1fr); }
     .reports-stats { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Tablet portrait 480px – 767px */
 @media (max-width: 767px) and (min-width: 480px) {
     .filter-grid { grid-template-columns: 1fr 1fr; }
     .reports-stats { grid-template-columns: 1fr 1fr; }
     .report-actions { justify-content: stretch; }
     .btn-generate { width: 100%; justify-content: center; }
     .reports-header { flex-direction: column; align-items: flex-start; }
-    /* ocultar columna usuario */
     .reports-table thead th:nth-child(4),
     .reports-table td:nth-child(4) { display: none; }
 }
 
-/* Móvil ≤ 479px */
 @media (max-width: 479px) {
     .filter-grid { grid-template-columns: 1fr; }
     .reports-stats { grid-template-columns: 1fr; }
@@ -359,7 +385,6 @@
     .reports-header { flex-direction: column; align-items: flex-start; }
     .reports-badge { display: none; }
     .report-form { padding: 14px; }
-    /* ocultar fecha y usuario en móvil */
     .reports-table thead th:nth-child(3),
     .reports-table td:nth-child(3),
     .reports-table thead th:nth-child(4),

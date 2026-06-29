@@ -124,12 +124,8 @@ include 'includes/layout.php';
                     <label>Tipo de Personal</label>
                     <select name="tipo">
                         <option value="general">General</option>
-                        <option value="CIVIL">Civil</option>
-                        <option value="TROPA">Tropa</option>
-                        <option value="REE">REE</option>
-                        <option value="SUB OFICIAL">Sub Oficial</option>
-                        <option value="TEC">TEC</option>
-                        <option value="OF">OF</option>
+                        <option value="MILITAR">Personal militar</option>
+                        <option value="CIVIL">Personal civil</option>
                     </select>
                 </div>
 

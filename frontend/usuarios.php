@@ -139,61 +139,66 @@ include 'includes/layout.php';
 
             <div class="table-wrap">
                 <?php if ($usuarios && pg_num_rows($usuarios) > 0): ?>
-                <table class="usuarios-table">
-                    <thead>
-                        <tr>
-                            <th style="width:60px">#</th>
-                            <th>Usuario</th>
-                            <th>Email</th>
-                            <th>Rol</th>
-                            <th style="width:100px; text-align:center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($u = pg_fetch_assoc($usuarios)): ?>
-                            <?php
+                    <table class="usuarios-table">
+                        <thead>
+                            <tr>
+                                <th style="width:60px">#</th>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th style="width:100px; text-align:center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($u = pg_fetch_assoc($usuarios)): ?>
+                                <?php
                                 $iniciales = strtoupper(substr($u['username'], 0, 2));
                                 $rolLower  = strtolower($u['rol']);
-                                $rolClass  = match(true) {
+                                $rolClass  = match (true) {
                                     str_contains($rolLower, 'super')  => 'role-super',
                                     str_contains($rolLower, 'admin')  => 'role-admin',
                                     default                            => 'role-user'
                                 };
-                            ?>
-                            <tr>
-                                <td class="td-id"><?= $u['id_usuario'] ?></td>
-                                <td>
-                                    <div class="td-user">
-                                        <div class="td-av"><?= $iniciales ?></div>
-                                        <span><?= htmlspecialchars($u['username'] ?? '') ?></span>
-                                    </div>
-                                </td>
-                                <td><?= htmlspecialchars($u['email'] ?? '') ?></td>
-                                <td>
-                                    <span class="role-badge <?= $rolClass ?>">
-                                        <i class="fa fa-shield-halved"></i>
-                                        <?= htmlspecialchars($u['rol'] ?? '') ?>
-                                    </span>
-                                </td>
-                                <td class="td-acciones">
-                                    <a href="editar_usuario.php?id=<?= $u['id_usuario'] ?>" class="btn-action edit" title="Editar">
-                                        <i class="fa fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="../backend/controllers/eliminarUsuario.php?id=<?= $u['id_usuario'] ?>"
-                                       class="btn-action delete" title="Eliminar"
-                                       onclick="return confirm('¿Seguro que desea eliminar a <?= htmlspecialchars($u['username']) ?>?')">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
+                                ?>
+                                <tr>
+                                    <td class="td-id"><?= $u['id_usuario'] ?></td>
+                                    <td>
+                                        <div class="td-user">
+                                            <div class="td-av"><?= $iniciales ?></div>
+                                            <span><?= htmlspecialchars($u['username'] ?? '') ?></span>
+                                        </div>
+                                    </td>
+                                    <td><?= htmlspecialchars($u['email'] ?? '') ?></td>
+                                    <td>
+                                        <span class="role-badge <?= $rolClass ?>">
+                                            <i class="fa fa-shield-halved"></i>
+                                            <?= htmlspecialchars($u['rol'] ?? '') ?>
+                                        </span>
+                                    </td>
+                                    <td class="td-acciones">
+                                        <a href="editar_usuario.php?id=<?= $u['id_usuario'] ?>" class="btn-action edit" title="Editar">
+                                            <i class="fa fa-pen-to-square"></i>
+                                        </a>
+                                        <form action="../backend/controllers/eliminarUsuario.php" method="POST" style="display:inline;"
+                                            onsubmit="return confirm('¿Seguro que desea eliminar a <?= htmlspecialchars($u['username']) ?>?')">
+
+                                            <input type="hidden" name="id_usuario" value="<?= $u['id_usuario'] ?>">
+
+                                            <button type="submit" class="btn-action delete" title="Eliminar">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
                 <?php else: ?>
-                <div class="no-results">
-                    <i class="fa fa-users-slash"></i>
-                    <p>No hay usuarios registrados</p>
-                </div>
+                    <div class="no-results">
+                        <i class="fa fa-users-slash"></i>
+                        <p>No hay usuarios registrados</p>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
