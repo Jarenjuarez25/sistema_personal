@@ -1,17 +1,9 @@
-/* =========================================================
-   CONTENEDOR
-========================================================= */
-
 .edit-container{
     width: 100%;
     max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
 }
-
-/* =========================================================
-   CARD
-========================================================= */
 
 .reg-card{
     background: #ffffff !important;
@@ -20,10 +12,6 @@
     box-shadow: 0 4px 20px rgba(0,0,0,.08) !important;
     border: 1px solid rgba(0,0,0,.06) !important;
 }
-
-/* =========================================================
-   HEADER
-========================================================= */
 
 .edit-header{
     margin-bottom: 35px;
@@ -46,19 +34,11 @@
     color: #395b39;
 }
 
-/* =========================================================
-   FORMULARIO
-========================================================= */
-
 .reg-form{
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 22px !important;
 }
-
-/* =========================================================
-   GROUP
-========================================================= */
 
 .reg-form .form-group{
     display: flex !important;
@@ -69,20 +49,12 @@
     grid-column: span 2 !important;
 }
 
-/* =========================================================
-   LABELS
-========================================================= */
-
 .reg-form .form-group label{
     font-size: 14px !important;
     font-weight: 700 !important;
     color: #334433 !important;
     margin-bottom: 8px !important;
 }
-
-/* =========================================================
-   INPUTS
-========================================================= */
 
 .reg-form .form-group input,
 .reg-form .form-group select,
@@ -110,8 +82,6 @@
     height: auto !important;
 }
 
-/* FOCUS */
-
 .reg-form .form-group input:focus,
 .reg-form .form-group select:focus,
 .reg-form .form-group textarea:focus{
@@ -121,9 +91,6 @@
     box-shadow: 0 0 0 4px rgba(95,180,95,.15) !important;
 }
 
-/* =========================================================
-   BOTONES
-========================================================= */
 
 .reg-form .form-actions{
     grid-column: span 2 !important;
@@ -170,10 +137,6 @@
     transform: translateY(-2px);
     box-shadow: 0 10px 24px rgba(70,140,70,.35) !important;
 }
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media(max-width: 768px){
 

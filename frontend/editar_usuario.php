@@ -29,11 +29,21 @@ FROM usuario
 WHERE id_usuario = $1
 ", [$id]);
 
-if (!$query || pg_num_rows($query) === 0) {
-    die("Usuario no encontrado");
+if (!$query) {
+    die("Error en la query: " . pg_last_error($conn));
 }
 
-$usuario = pg_fetch_assoc($query);
+if (pg_num_rows($query) === 0) {
+    die("Usuario no encontrado con ID: " . htmlspecialchars($id));
+}
+
+$usuarioData = pg_fetch_assoc($query);
+
+// DEBUG: Verifica que $usuarioData tiene datos
+if (!$usuarioData) {
+    die("Error al obtener datos del usuario");
+}
+echo "<!-- DEBUG: Usuario = " . htmlspecialchars(json_encode($usuarioData)) . " -->";
 
 $roles = pg_query($conn, "
 SELECT id_rol, nombre
@@ -63,25 +73,25 @@ include 'includes/layout.php';
         </div>
     </div>
 
-    <form action="../backend/controllers/actualizarUsuario.php" method="POST" class="edit-user-form">
+    <form action="../backend/controllers/actualizarUsuario.php" method="POST" class="edit-user-form" style="display: block !important; height: auto !important;">
 
-        <input type="hidden" name="id_usuario" value="<?= htmlspecialchars((string)$usuario['id_usuario']) ?>">
+        <input type="hidden" name="id_usuario" value="<?= htmlspecialchars((string)$usuarioData['id_usuario']) ?>">
 
         <div class="edit-form-group">
             <label>Nombre de usuario</label>
-            <input type="text" name="username" value="<?= htmlspecialchars((string)$usuario['username']) ?>" required>
+            <input type="text" name="username" value="<?= htmlspecialchars((string)$usuarioData['username']) ?>" required>
         </div>
 
         <div class="edit-form-group">
             <label>Correo electrónico</label>
-            <input type="email" name="email" value="<?= htmlspecialchars((string)$usuario['email']) ?>" required>
+            <input type="email" name="email" value="<?= htmlspecialchars((string)$usuarioData['email']) ?>" required>
         </div>
 
         <div class="edit-form-group">
             <label>Rol</label>
             <select name="id_rol" required>
                 <?php while ($r = pg_fetch_assoc($roles)): ?>
-                    <option value="<?= $r['id_rol'] ?>" <?= ($usuario['id_rol'] == $r['id_rol']) ? 'selected' : '' ?>>
+                    <option value="<?= $r['id_rol'] ?>" <?= ($usuarioData['id_rol'] == $r['id_rol']) ? 'selected' : '' ?>>
                         <?= htmlspecialchars($r['nombre']) ?>
                     </option>
                 <?php endwhile; ?>
