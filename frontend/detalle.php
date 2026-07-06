@@ -1,22 +1,22 @@
-    <?php
-    session_start();
-    
-    require_once(__DIR__ . "/../backend/config/conexion.php");
+<?php
+session_start();
 
-    if (!isset($_SESSION["usuario"])) {
-        header("Location: login.php");
-        exit();
-    }
+require_once(__DIR__ . "/../backend/config/conexion.php");
 
-    $pageTitle  = "Detalle de Personal";
-    $activePage = "detalle";
+if (!isset($_SESSION["usuario"])) {
+    header("Location: login.php");
+    exit();
+}
 
-    define('BASE_CSS', 'css/');
-    define('BASE_ASSETS', '../../assets/');
+$pageTitle  = "Detalle de Personal";
+$activePage = "detalle";
 
-    $extraCSS = '<link rel="stylesheet" href="' . BASE_CSS . 'detalle.css">';
+define('BASE_CSS', 'css/');
+define('BASE_ASSETS', '../../assets/');
 
-    $query = "
+$extraCSS = '<link rel="stylesheet" href="' . BASE_CSS . 'detalle.css">';
+
+$query = "
 
     SELECT
         p.id_personal,
@@ -54,7 +54,7 @@
 
     ";
 
-    $queryCivil = "
+$queryCivil = "
     SELECT
         c.id_civil,
         c.nombres,
@@ -69,290 +69,290 @@
     ORDER BY c.id_civil DESC
     ";
 
-    $resultCivil = pg_query($conn, $queryCivil);
+$resultCivil = pg_query($conn, $queryCivil);
 
-    $result = pg_query($conn, $query);
+$result = pg_query($conn, $query);
 
-    include 'includes/layout.php';
+include 'includes/layout.php';
 
-    ?>
+?>
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div class="page-header-title">
+    <div class="page-header-title">
 
-            <h1>Detalle de Personal</h1>
+        <h1>Detalle de Personal</h1>
 
-            <p>
-                Información completa del personal registrado
-            </p>
-
-        </div>
+        <p>
+            Información completa del personal registrado
+        </p>
 
     </div>
 
-    <div class="card detalle-card">
+</div>
 
-        <div class="detalle-header">
+<div class="card detalle-card">
 
-            <h3>
+    <div class="detalle-header">
 
-                <i class="fa fa-id-card"></i>
+        <h3>
 
-                Personal Militar
+            <i class="fa fa-id-card"></i>
 
-            </h3>
+            Personal Militar
 
-            <span class="detalle-badge">
+        </h3>
 
-                <?= pg_num_rows($result) ?> registros
+        <span class="detalle-badge">
 
-            </span>
+            <?= pg_num_rows($result) ?> registros
 
-        </div>
+        </span>
 
-        <div class="table-wrap">
+    </div>
 
-            <table class="detalle-table">
+    <div class="table-wrap">
 
-                <thead>
+        <table class="detalle-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>Personal</th>
+
+                    <th>Grado</th>
+
+                    <th>Unidad</th>
+
+                    <th>DNI</th>
+
+                    <th>Ingreso</th>
+
+                    <th>Estado</th>
+
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <?php $i = 1; ?>
+
+                <?php while ($row = pg_fetch_assoc($result)): ?>
+
+                    <?php
+
+                    $palabras = explode(' ', trim($row['nombres'] ?? ''));
+
+                    $iniciales = strtoupper(
+
+                        substr($palabras[0] ?? '', 0, 1) .
+
+                            substr($palabras[1] ?? '', 0, 1)
+
+                    );
+
+                    ?>
 
                     <tr>
 
-                        <th>#</th>
+                        <td class="td-id">
 
-                        <th>Personal</th>
+                            <?= $i++ ?>
 
-                        <th>Grado</th>
+                        </td>
 
-                        <th>Unidad</th>
+                        <td>
 
-                        <th>DNI</th>
+                            <div class="td-user">
 
-                        <th>Ingreso</th>
+                                <div class="td-av">
 
-                        <th>Estado</th>
+                                    <?= $iniciales ?>
+
+                                </div>
+
+                                <div class="td-user-info">
+
+                                    <span class="td-name">
+
+                                        <?= htmlspecialchars($row['nombres'] ?? '_') ?>
+
+                                    </span>
+
+                                    <span class="td-sub">
+
+                                        ID: <?= $row['id_personal'] ?>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <span class="grado-tag">
+
+                                <?= htmlspecialchars($row['grado'] ?? '-') ?>
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <?= htmlspecialchars($row['unidad'] ?? '-') ?>
+
+                        </td>
+
+
+                        <td>
+
+                            <?= htmlspecialchars($row['dni'] ?? '-') ?>
+
+                        </td>
+
+                        <td>
+
+                            <?= htmlspecialchars($row['fecha_ingreso'] ?? '-') ?>
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge">
+
+                                <?= htmlspecialchars($row['estado'] ?? '-') ?>
+
+                            </span>
+
+                        </td>
 
 
                     </tr>
 
-                </thead>
+                <?php endwhile; ?>
 
-                <tbody>
+            </tbody>
 
-                    <?php $i = 1; ?>
-
-                    <?php while ($row = pg_fetch_assoc($result)): ?>
-
-                        <?php
-
-                        $palabras = explode(' ', trim($row['nombres'] ?? ''));
-
-                        $iniciales = strtoupper(
-
-                            substr($palabras[0] ?? '', 0, 1) .
-
-                                substr($palabras[1] ?? '', 0, 1)
-
-                        );
-
-                        ?>
-
-                        <tr>
-
-                            <td class="td-id">
-
-                                <?= $i++ ?>
-
-                            </td>
-
-                            <td>
-
-                                <div class="td-user">
-
-                                    <div class="td-av">
-
-                                        <?= $iniciales ?>
-
-                                    </div>
-
-                                    <div class="td-user-info">
-
-                                        <span class="td-name">
-
-                                            <?= htmlspecialchars($row['nombres'] ?? '') ?>
-
-                                        </span>
-
-                                        <span class="td-sub">
-
-                                            ID: <?= $row['id_personal'] ?>
-
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-
-                                <span class="grado-tag">
-
-                                    <?= htmlspecialchars($row['grado'] ?? '-') ?>
-
-                                </span>
-
-                            </td>
-
-
-                            <td>
-
-                                <?= htmlspecialchars($row['unidad'] ?? '-') ?>
-
-                            </td>
-
-
-                            <td>
-
-                                <?= htmlspecialchars($row['dni'] ?? '-') ?>
-
-                            </td>
-
-                            <td>
-
-                                <?= htmlspecialchars($row['fecha_ingreso'] ?? '-') ?>
-
-                            </td>
-
-                            <td>
-
-                                <span class="badge">
-
-                                    <?= htmlspecialchars($row['estado'] ?? '-') ?>
-
-                                </span>
-
-                            </td>
-
-
-                        </tr>
-
-                    <?php endwhile; ?>
-
-                </tbody>
-
-            </table>
-
-        </div>
+        </table>
 
     </div>
 
-    <div class="card detalle-card" style="margin-top:20px;">
+</div>
 
-        <div class="detalle-header">
+<div class="card detalle-card" style="margin-top:20px;">
 
-            <h3>
-                <i class="fa fa-user-tie"></i>
-                Personal Civil
-            </h3>
+    <div class="detalle-header">
 
-            <span class="detalle-badge">
-                <?= pg_num_rows($resultCivil) ?> registros
-            </span>
+        <h3>
+            <i class="fa fa-user-tie"></i>
+            Personal Civil
+        </h3>
 
-        </div>
+        <span class="detalle-badge">
+            <?= pg_num_rows($resultCivil) ?> registros
+        </span>
 
-        <div class="table-wrap">
+    </div>
 
-            <table class="detalle-table">
+    <div class="table-wrap">
 
-                <thead>
+        <table class="detalle-table">
+
+            <thead>
+
+                <tr>
+                    <th>#</th>
+                    <th>Personal</th>
+                    <th>DNI</th>
+                    <th>N/A</th>
+                    <th>Unidad</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Condición</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <?php $j = 1; ?>
+
+                <?php while ($row = pg_fetch_assoc($resultCivil)): ?>
+
+                    <?php
+                    $palabras = explode(' ', trim($row['nombres'] ?? ''));
+
+                    $iniciales = strtoupper(
+                        substr($palabras[0] ?? '', 0, 1) .
+                            substr($palabras[1] ?? '', 0, 1)
+                    );
+                    ?>
 
                     <tr>
-                        <th>#</th>
-                        <th>Personal</th>
-                        <th>DNI</th>
-                        <th>N/A</th>
-                        <th>Unidad</th>
-                        <th>Fecha Ingreso</th>
-                        <th>Condición</th>
-                    </tr>
 
-                </thead>
+                        <td class="td-id"><?= $j++ ?></td>
 
-                <tbody>
+                        <td>
 
-                    <?php $j = 1; ?>
+                            <div class="td-user">
 
-                    <?php while ($row = pg_fetch_assoc($resultCivil)): ?>
-
-                        <?php
-                        $palabras = explode(' ', trim($row['nombres'] ?? ''));
-
-                        $iniciales = strtoupper(
-                            substr($palabras[0] ?? '', 0, 1) .
-                                substr($palabras[1] ?? '', 0, 1)
-                        );
-                        ?>
-
-                        <tr>
-
-                            <td class="td-id"><?= $j++ ?></td>
-
-                            <td>
-
-                                <div class="td-user">
-
-                                    <div class="td-av">
-                                        <?= $iniciales ?>
-                                    </div>
-
-                                    <div class="td-user-info">
-                                        <span class="td-name">
-                                            <?= htmlspecialchars($row['nombres']) ?>
-                                        </span>
-
-                                        <span class="td-sub">
-                                            ID: <?= $row['id_civil'] ?>
-                                        </span>
-                                    </div>
-
+                                <div class="td-av">
+                                    <?= $iniciales ?>
                                 </div>
 
-                            </td>
+                                <div class="td-user-info">
+                                    <span class="td-name">
+                                        <?= htmlspecialchars($row['nombres'] ?? '-') ?>
+                                    </span>
 
-                            <td><?= htmlspecialchars($row['dni']) ?></td>
+                                    <span class="td-sub">
+                                        ID: <?= $row['id_civil'] ?>
+                                    </span>
+                                </div>
 
-                            <td>
-                                <code><?= htmlspecialchars($row['na']) ?></code>
-                            </td>
+                            </div>
 
-                            <td>
-                                <?= htmlspecialchars($row['unidad']) ?>
-                            </td>
+                        </td>
 
-                            <td>
-                                <?= !empty($row['fecha_ingreso']) ? date('d/m/Y', strtotime($row['fecha_ingreso'])) : '-' ?>
-                            </td>
+                        <td><?= htmlspecialchars($row['dni'] ?? '-') ?></td>
 
-                            <td>
-                                <span class="badge">
-                                    <?= htmlspecialchars($row['condicion']) ?>
-                                </span>
-                            </td>
+                        <td>
+                            <code><?= htmlspecialchars($row['na'] ?? '-') ?></code>
+                        </td>
 
-                        </tr>
+                        <td>
+                            <?= htmlspecialchars($row['unidad'] ?? '-') ?>
+                        </td>
 
-                    <?php endwhile; ?>
+                        <td>
+                            <?= !empty($row['fecha_ingreso']) ? date('d/m/Y', strtotime($row['fecha_ingreso'])) : '-' ?>
+                        </td>
 
-                </tbody>
+                        <td>
+                            <span class="badge">
+                                <?= htmlspecialchars($row['condicion'] ?? '-') ?>
+                            </span>
+                        </td>
 
-            </table>
+                    </tr>
 
-        </div>
+                <?php endwhile; ?>
+
+            </tbody>
+
+        </table>
 
     </div>
 
-    <?php include 'includes/layout_end.php'; ?>
+</div>
+
+<?php include 'includes/layout_end.php'; ?>
