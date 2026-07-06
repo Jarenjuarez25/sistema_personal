@@ -39,33 +39,31 @@ if ($row = pg_fetch_assoc($result)) {
 
         try {
             $mail->isSMTP();
-            $mail->Host       = getenv("MAIL_HOST") ?: "smtp.gmail.com";
+            $mail->Host       = getenv('MAIL_HOST');
             $mail->SMTPAuth   = true;
-            $mail->Username   = getenv("MAIL_USER");
-            $mail->Password   = getenv("MAIL_PASS");
+            $mail->Username   = getenv('MAIL_USER');
+            $mail->Password   = getenv('MAIL_PASS');
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = getenv("MAIL_PORT") ?: 587;
+            $mail->Port       = getenv('MAIL_PORT');
 
-            $mail->setFrom(getenv("MAIL_FROM") ?: getenv("MAIL_USER"), "Sistema Brigada");
+            $mail->setFrom(getenv('MAIL_FROM'), 'Sistema Brigada');
             $mail->addAddress($row["email"]);
 
-            $mail->CharSet = "UTF-8";
-            $mail->Subject = "Código de verificación";
+            $mail->CharSet = 'UTF-8';
+            $mail->isHTML(false);
+            $mail->Subject = 'Código de verificación';
             $mail->Body    = "Tu código de verificación es: $codigo";
 
             $mail->send();
 
             header("Location: ../../frontend/verificar.php");
             exit();
-
         } catch (Exception $e) {
             die("Error al enviar correo: " . $mail->ErrorInfo);
         }
-
     } else {
         echo "Contraseña incorrecta";
     }
-
 } else {
     echo "Usuario no encontrado";
 }
