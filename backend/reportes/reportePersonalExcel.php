@@ -414,15 +414,9 @@ foreach (range('A', 'N') as $col) {
 
 $spreadsheet->setActiveSheetIndex(0);
 
-$carpeta = '../../reportes_generados/';
-
-if (!file_exists($carpeta)) {
-    mkdir($carpeta, 0777, true);
-}
-
 $nombreArchivo = 'reporte_personal_' . time() . '.xlsx';
 
-$rutaArchivo = $carpeta . $nombreArchivo;
+$rutaArchivo = sys_get_temp_dir() . '/' . $nombreArchivo;
 
 $writer = new Xlsx($spreadsheet);
 $writer->setIncludeCharts(true);

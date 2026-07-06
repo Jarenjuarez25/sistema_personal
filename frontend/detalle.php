@@ -1,5 +1,6 @@
     <?php
     session_start();
+    
     require_once(__DIR__ . "/../backend/config/conexion.php");
 
     if (!isset($_SESSION["usuario"])) {

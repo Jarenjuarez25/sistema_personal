@@ -60,21 +60,18 @@ async function sendMessage() {
 
     try {
 
-        const response = await fetch(
-            "/sistema_registro/backend/asistente/chat.php",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                    "application/json"
-                },
-
-                body: JSON.stringify({
-                    mensaje: text
-                })
-            }
-        );
+const response = await fetch(
+    "/backend/asistente/chat.php",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mensaje: text
+        })
+    }
+);
 
         const data = await response.json();
 
