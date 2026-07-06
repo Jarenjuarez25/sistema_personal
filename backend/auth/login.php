@@ -2,10 +2,6 @@
 session_start();
 
 require_once(__DIR__ . "/../config/conexion.php");
-require '../../vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 $username = $_POST["username"] ?? '';
 $password = $_POST["password"] ?? '';
@@ -35,35 +31,61 @@ if ($row = pg_fetch_assoc($result)) {
         $_SESSION["username"] = $row["username"];
         $_SESSION["rol"] = $row["rol"];
 
-        $mail = new PHPMailer(true);
+        $apiKey = getenv("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");
+        $fromEmail = getenv("MAIL_FROM") ?: "juarezjarengamer@gmail.com";
 
-        try {
-            $mail->isSMTP();
-            $mail->Host       = getenv('MAIL_HOST');
-            $mail->SMTPAuth   = true;
-            $mail->Username   = getenv('MAIL_USER');
-            $mail->Password   = getenv('MAIL_PASS');
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = getenv('MAIL_PORT');
+        $data = [
+            "sender" => [
+                "name" => "Sistema Brigada",
+                "email" => $fromEmail
+            ],
+            "to" => [
+                [
+                    "email" => $row["email"],
+                    "name" => $row["username"]
+                ]
+            ],
+            "subject" => "Código de verificación",
+            "htmlContent" => "
+                <h3>Sistema Brigada</h3>
+                <p>Tu código de verificación es:</p>
+                <h2>$codigo</h2>
+                <p>No compartas este código con nadie.</p>
+            "
+        ];
 
-            $mail->setFrom(getenv('MAIL_FROM'), 'Sistema Brigada');
-            $mail->addAddress($row["email"]);
+        $ch = curl_init("https://api.brevo.com/v3/smtp/email");
 
-            $mail->CharSet = 'UTF-8';
-            $mail->isHTML(false);
-            $mail->Subject = 'Código de verificación';
-            $mail->Body    = "Tu código de verificación es: $codigo";
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "accept: application/json",
+            "api-key: " . $apiKey,
+            "content-type: application/json"
+        ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
-            $mail->send();
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
 
+        curl_close($ch);
+
+        if ($curlError) {
+            die("Error CURL: " . $curlError);
+        }
+
+        if ($httpCode >= 200 && $httpCode < 300) {
             header("Location: ../../frontend/verificar.php");
             exit();
-        } catch (Exception $e) {
-            die("Error al enviar correo: " . $mail->ErrorInfo);
+        } else {
+            die("Error Brevo API: " . $response);
         }
+
     } else {
         echo "Contraseña incorrecta";
     }
+
 } else {
     echo "Usuario no encontrado";
 }
