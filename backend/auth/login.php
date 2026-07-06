@@ -43,7 +43,7 @@ if ($row = pg_fetch_assoc($result)) {
             $mail->SMTPAuth   = true;
             $mail->Username   = getenv('MAIL_USER');
             $mail->Password   = getenv('MAIL_PASS');
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = getenv('MAIL_PORT');
 
             $mail->setFrom(getenv('MAIL_FROM'), 'Sistema Brigada');
