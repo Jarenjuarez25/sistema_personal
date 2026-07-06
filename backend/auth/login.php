@@ -31,7 +31,11 @@ if ($row = pg_fetch_assoc($result)) {
         $_SESSION["username"] = $row["username"];
         $_SESSION["rol"] = $row["rol"];
 
-        $apiKey = getenv("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");
+        $apiKey = trim(getenv("BREVO_API_KEY") ?: "");
+        if ($apiKey === "") {
+            die("BREVO_API_KEY no está configurada en Render");
+        }
+
         $fromEmail = getenv("MAIL_FROM") ?: "juarezjarengamer@gmail.com";
 
         $data = [
@@ -81,11 +85,9 @@ if ($row = pg_fetch_assoc($result)) {
         } else {
             die("Error Brevo API: " . $response);
         }
-
     } else {
         echo "Contraseña incorrecta";
     }
-
 } else {
     echo "Usuario no encontrado";
 }
