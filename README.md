@@ -7,7 +7,7 @@ Sistema web desarrollado para la **1ra Brigada de Servicios del Ejército del Pe
 ## 📸 Vista del sistema
 
 <p align="center">
-  <img src="<img width="1706 height="864" alt="Captura de pantalla 2026-07-13 a la(s) 1 19 28 p  m" src="https://github.com/user-attachments/assets/7f0c1585-3bf0-4237-8707-03acae705920/>" width="850">
+  <img width="1706" height="864" alt="Captura de pantalla 2026-07-13 a la(s) 1 19 28 p  m" src="https://github.com/user-attachments/assets/87a5ef47-fdd1-4a53-8fbd-60bfcab44b45" />
 </p>
 
 ---
